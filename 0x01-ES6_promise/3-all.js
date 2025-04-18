@@ -1,4 +1,5 @@
-import { uploadPhoto, createUser } from "./utils";
-export default function  handleProfileSignup() {
-    
+import { uploadPhoto, createUser } from './utils';
+
+export default function handleProfileSignup() {
+
 }

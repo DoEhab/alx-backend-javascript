@@ -1,11 +1,9 @@
 process.stdout.write('Welcome to ALX, what is your name?\n');
 
-process.stdin.on('readable', () => {
-  const userInput = process.stdin.read();
+process.stdin.resume();
 
-  if (userInput) {
-    process.stdout.write(`Your name is: ${userInput}\n`);
-  }
+process.stdin.on('data', (chunk) => {
+  process.stdout.write(`Your name is: ${chunk}`);
 });
 
 process.stdin.on('end', () => {

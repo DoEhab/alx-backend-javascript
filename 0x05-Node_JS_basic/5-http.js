@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 
-const path = process.argv[2];
+const filePath = process.argv[2];
 
 const app = http.createServer((req, res) => {
   res.statusCode = 200;
@@ -10,7 +10,7 @@ const app = http.createServer((req, res) => {
   if (req.url === '/') {
     res.end('Hello ALX!');
   } else if (req.url === '/students') {
-    fs.readFile(path, 'utf8', (err, fileData) => {
+    fs.readFile(filePath, 'utf8', (err, fileData) => {
       if (err) {
         res.statusCode = 500;
         res.end('Cannot load the database');

@@ -1,12 +1,31 @@
-const fileStream = require('fs');
+const express = require('express');
+const fs = require('fs');
 
-function countStudents(filePath) {
-  try {
-    const fileData = fileStream.readFileSync(filePath, 'utf8');
+const app = express();
+const port = 1245;
+const filePath = process.argv[2];
+
+app.get('/', (req, res) => {
+  res.send('Hello ALX!');
+});
+
+app.get('/students', (req, res) => {
+  if (!filePath) {
+    res.status(500).send('Cannot load the database');
+    return;
+  }
+  fs.readFile(filePath, 'utf8', (err, fileData) => {
+    if (err) {
+      res.statusCode = 500;
+      res.send('Cannot load the database');
+      return;
+    }
 
     const lines = fileData.split('\n').filter((line) => line.trim() !== '');
-
-    if (lines.length <= 1) return;
+    if (lines.length <= 1) {
+      res.send('This is the list of our students\nNumber of students: 0');
+      return;
+    }
 
     const headers = lines[0].split(',');
     const fieldsIndex = headers.indexOf('field');
@@ -17,7 +36,6 @@ function countStudents(filePath) {
 
     for (let i = 1; i < lines.length; i += 1) {
       const line = lines[i].trim();
-
       if (line !== '') {
         const fields = line.split(',');
         const field = fields[fieldsIndex];
@@ -34,18 +52,21 @@ function countStudents(filePath) {
     }
 
     const totalStudents = Object.values(fieldsCount).reduce((sum, val) => sum + val, 0);
-    console.log(`Number of students: ${totalStudents}`);
+    let response = 'This is the list of our students\n';
+    response += `Number of students: ${totalStudents}\n`;
 
     for (const field in fieldsCount) {
       if (Object.hasOwn(fieldsCount, field)) {
         const count = fieldsCount[field];
         const list = studentData[field].join(', ');
-        console.log(`Number of students in ${field}: ${count}. List: ${list}`);
+        response += `Number of students in ${field}: ${count}. List: ${list}\n`;
       }
     }
-  } catch (error) {
-    throw new Error('Cannot load the database');
-  }
-}
 
-module.exports = countStudents;
+    res.send(response.trim());
+  });
+});
+
+app.listen(port);
+
+module.exports = app;

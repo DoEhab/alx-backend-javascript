@@ -1,9 +1,14 @@
 const readInput = require('readline');
 
-readInput.createInterface({
+const rl = readInput.createInterface({
   input: process.stdin,
   output: process.stdout,
-}).question('Welcome to ALX, what is your name?\n', (name) => {
+});
+rl.question('Welcome to ALX, what is your name?\n', (name) => {
   process.stdout.write(`Your name is: ${name}\n`);
-  process.exit();
+  rl.close(); // Triggers the 'close' event
+});
+
+rl.on('close', () => {
+  console.log('This important software is now closing\n');
 });

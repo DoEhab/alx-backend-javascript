@@ -2,17 +2,6 @@ const request = require('request');
 const chai = require('chai');
 
 const { expect } = chai;
-const app = require('./10-api/api');
-
-let server;
-
-before((done) => {
-  server = app.listen(7865, () => done());
-});
-
-after(() => {
-  server.close();
-});
 
 
 describe('index Page', () => {
@@ -63,7 +52,7 @@ describe('index Page', () => {
 
   it('test login response', () => new Promise((done) => {
     request.post(`${API_URL}/login`,
-      { json: { userName: 'Do' } },
+      JSON.stringify({ userName: 'Do' }),
       (_err, res, body) => {
         expect(res.statusCode).to.be.equal(200);
         expect(body).to.be.equal('Welcome Do');

@@ -51,8 +51,13 @@ describe('index Page', () => {
   }));
 
   it('test login response', () => new Promise((done) => {
-    request.post(`${API_URL}/login`,
-      JSON.stringify({ userName: 'Do' }),
+    request.post(
+      {
+      url: `${API_URL}/login`,
+      body: JSON.stringify({ userName: 'Do' }),
+      headers: { 'Content-Type': 'application/json' }
+    }
+      ,
       (_err, res, body) => {
         expect(res.statusCode).to.be.equal(200);
         expect(body).to.be.equal('Welcome Do');

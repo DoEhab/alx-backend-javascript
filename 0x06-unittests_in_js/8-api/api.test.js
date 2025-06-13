@@ -8,6 +8,7 @@ describe('Index Page', () => {
   it('test responses', (done) => {
     request.get(`${API_URL}/`, (_err, res, body) => {
       expect(res.statusCode).to.be.equal(200);
+      expect(res).to.have.header('content-type', /text\/html/);
       expect(body).to.be.equal('Welcome to the payment system');
       done();
     });

@@ -8,7 +8,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/cart/:id(\\d+)', (req, res) => {
-  const id = req.params.id;
+  const { id } = req.params;
   res.send(`Payment methods for cart ${id}`);
 });
 
@@ -21,14 +21,17 @@ app.get('/available_payments', (req, res) => {
     {
       payment_methods: {
         credit_cards: true,
-        paypal: false
-      }
-    }
+        paypal: false,
+      },
+    },
   );
 });
 
 app.post('/login', (req, res) => {
-  const userName = req.body.userName;
+  let userName = 'Doha';
+  if (req.body) {
+    userName = req.body.userName;
+  }
   res.send(`Welcome ${userName}`);
 });
 

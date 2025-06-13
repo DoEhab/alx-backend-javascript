@@ -1,32 +1,16 @@
+const request = require('request');
 const chai = require('chai');
 const expect = chai.expect;
-const app = require('./api');
-const chaiHttp = require('chai-http');
-chai.use(chaiHttp);
 
-// describe('Index page', () => {
-//     it('return status code', (done) =>{
-//         chai.request(app)
-//         .get('/')
-//         .end((err, res) => {
-//             expect(res).to.have.status(200);
-//             done();
-//         });
-//     });
-//     it('return data', (done) =>{
-//         chai.request(app)
-//         .get('/')
-//         .end((err, res) => {
-//             expect(res.text).to.equal('Welcome to the payment system');
-//             done();
-//         });
-//     });
-//     it('return header', (done) =>{
-//         chai.request(app)
-//         .get('/')
-//         .end((err, res) => {
-//             expect(res).to.have.header('content-type', /text\/html/);
-//             done();
-//         });
-//     });
-// });
+describe('Index Page', () => {
+  const API_URL = 'http://localhost:7865';
+
+  it('test responses', (done) => {
+    request.get(`${API_URL}/`, (err, res, body) => {
+      expect(res.statusCode).to.be.equal(200);
+      expect(res).to.have.header('content-type', /text\/html/);
+      expect(body).to.be.equal('Welcome to the payment system');
+      done();
+    });
+  });
+});

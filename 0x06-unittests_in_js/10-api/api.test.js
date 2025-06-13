@@ -33,31 +33,30 @@ describe('Index Page', () => {
     });
   });
 
-  it('test available payments responses', (done) => {
-    request.get(`${API_URL}/available_payments`, (err, res, body) => {
+  it('test available payments response', (done) => {
+    request.get(`${API_URL}/available_payments`, (_err, res, body) => {
       expect(res.statusCode).to.be.equal(200);
-      expect(JSON.parse(body)).to.deep.equal(
-        {
-          payment_methods: {
-            credit_cards: true,
+      expect(JSON.parse(body))
+        .to.be.deep.equal({
+          payment_methods: 
+          {
+            credit_cards: true, 
             paypal: false
           }
-        }
-      );
+        });
       done();
     });
   });
 
-  it('test login responses', (done) => {
-    const userName = 'Do';
-    request.post(
-      {
-        url: `${API_URL}/login`,
-        json: { userName },
-      }, (err, res, body) => {
+  it('test login response', (done) => {
+    request.post(`${API_URL}/login`, 
+      {json: {userName: 'Do'}}
+      , (_err, res, body) => {
       expect(res.statusCode).to.be.equal(200);
-      expect(body).to.be.equal(`Welcome ${userName}`);
+      expect(body).to.be.equal('Welcome Do');
       done();
     });
   });
+
+  
 });

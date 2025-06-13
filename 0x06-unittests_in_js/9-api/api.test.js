@@ -12,9 +12,14 @@ describe('Index Page', () => {
       done();
     });
   });
-
   it('test responses', (done) => {
-    request.get(`${API_URL}/cart/x`, (err, res, body) => {
+    request.get(`${API_URL}/cart/-1`, (err, res) => {
+      expect(res.statusCode).to.be.equal(404);
+      done();
+    });
+  });
+  it('test responses', (done) => {
+    request.get(`${API_URL}/cart/xrir-rr`, (err, res) => {
       expect(res.statusCode).to.be.equal(404);
       done();
     });

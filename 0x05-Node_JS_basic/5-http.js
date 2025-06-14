@@ -13,7 +13,7 @@ const app = http.createServer((req, res) => {
     fs.readFile(filePath, 'utf8', (err, fileData) => {
       if (err) {
         res.statusCode = 404;
-        res.end('This is the list of our students Cannot load the database');
+        res.end('This is the list of our students\nCannot load the database');
         return;
       }
       res.statusCode = 200;
@@ -63,7 +63,7 @@ const app = http.createServer((req, res) => {
     });
   } else {
     res.statusCode = 404;
-    res.end('This is the list of our students Cannot load the database');
+    res.end('This is the list of our students\nCannot load the database');
   }
 });
 

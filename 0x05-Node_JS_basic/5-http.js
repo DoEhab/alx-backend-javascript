@@ -16,7 +16,7 @@ const app = http.createServer((req, res) => {
         res.end('Cannot load the database');
         return;
       }
-
+      res.statusCode = 200;
       const lines = fileData.split('\n').filter((line) => line.trim() !== '');
       if (lines.length <= 1) {
         res.end('This is the list of our students\nNumber of students: 0');

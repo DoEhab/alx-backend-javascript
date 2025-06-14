@@ -12,8 +12,8 @@ const app = http.createServer((req, res) => {
   } else if (req.url === '/students') {
     fs.readFile(filePath, 'utf8', (err, fileData) => {
       if (err) {
-        res.statusCode = 500;
-        res.end('Cannot load the database');
+        res.statusCode = 404;
+        res.end('This is the list of our students Cannot load the database');
         return;
       }
       res.statusCode = 200;

@@ -6,18 +6,18 @@ const port = 1245;
 const filePath = process.argv[2];
 
 app.get('/', (req, res) => {
-  res.send('Hello ALX!');
+  res.send('Hello Holberton School!');
 });
 
 app.get('/students', (req, res) => {
   if (!filePath) {
-    res.status(500).send('Cannot load the database');
+    res.status(404).send('This is the list of our students\nCannot load the database');
     return;
   }
   fs.readFile(filePath, 'utf8', (err, fileData) => {
     if (err) {
-      res.statusCode = 500;
-      res.send('Cannot load the database');
+      res.statusCode = 404;
+      res.send('This is the list of our students\nCannot load the database');
       return;
     }
 

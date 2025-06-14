@@ -63,7 +63,7 @@ const app = http.createServer((req, res) => {
     });
   } else {
     res.statusCode = 404;
-    res.end('Not Found');
+    res.end('This is the list of our students Cannot load the database');
   }
 });
 

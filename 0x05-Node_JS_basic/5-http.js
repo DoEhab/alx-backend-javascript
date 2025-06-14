@@ -8,7 +8,7 @@ const app = http.createServer((req, res) => {
   res.setHeader('Content-Type', 'text/plain');
 
   if (req.url === '/') {
-    res.end('Hello ALX!');
+    res.end('Hello Holberton School!');
   } else if (req.url === '/students') {
     fs.readFile(filePath, 'utf8', (err, fileData) => {
       if (err) {

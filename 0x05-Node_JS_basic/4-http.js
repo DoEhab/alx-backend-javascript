@@ -2,7 +2,7 @@
 const http = require('http');
 
 const app = http.createServer((req, res) => {
-  const responseText = 'Hello ALX!';
+  const responseText = 'Hello Holberton School!';
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
   res.end(responseText);
